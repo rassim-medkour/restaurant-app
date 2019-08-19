@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 Route::prefix('admin')->group(function () {
+    Auth::routes();
 
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 
@@ -40,7 +41,9 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
-    Route::get('/users_managment/create', 'AdminController@showForm')->name('admin.make.user');
-    Route::post('/users_managment/create', 'AdminController@create')->name('admin.make.user');
+    Route::get('/caissier', 'CaissierController@caissier')->middleware(['auth:admin', 'auth.caissier']);
+    //'CaissierController@caissier'
 
+    Route::get('/create', 'AdminController@showCreateForm')->middleware(['auth:admin', 'auth.admin'])->name('admin.make.user');
+    Route::post('/create', 'AdminController@create')->middleware(['auth:admin', 'auth.admin'])->name('admin.make.user');
 });

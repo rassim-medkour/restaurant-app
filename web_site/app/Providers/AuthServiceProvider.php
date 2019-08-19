@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+/* use Illuminate\Contracts\Auth\Access\Gate as GateContract; */
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -25,6 +25,22 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        /* Gate::define('isCaissier', function ($admin) {
+        return $admin->job_title == 'caissier';
+        });
+
+        Gate::define('isAdmin', function ($admin) {
+        return $admin->job_title == 'admin';
+        });
+
+        Gate::define('isCuisinier', function ($admin) {
+        return $admin->job_title == 'cuisinier';
+        });
+
+        Gate::define('isManager', function ($admin) {
+        return $admin->job_title == 'manager';
+        });
+         */
         //
     }
 }
