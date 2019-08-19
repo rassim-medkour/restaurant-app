@@ -17,7 +17,7 @@ class ManagerController extends Controller
 
         $element->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'edited succefully');
     }
 
     protected function create(Request $data)
@@ -30,19 +30,20 @@ class ManagerController extends Controller
 
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'element created succefully');
     }
 
     protected function delete(Request $data)
     {
         $element = MenuElement::find($data->id);
         $element->delete();
+        return redirect()->back()->with('message', 'item deleted succefully');
     }
 
     protected function getAll()
     {
         $elements = MenuElement::all();
 
-        return view('manager.menu_elements',compact($elements));
+        return view('manager.menu_elements', compact($elements));
     }
 }

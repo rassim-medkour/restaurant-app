@@ -10,7 +10,10 @@ class CuisinierController extends Controller
 {
     public function validateCommand(Request $data)
     {
-        
+        $commande = Commande::find($data->id);
+        $commande->state = 'ready to deliver';
+        $commande->save();
+        return redirect()->back()->with('message', 'validated succefully');
     }
 
     public function showCommands()

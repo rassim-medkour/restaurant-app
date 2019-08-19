@@ -20,8 +20,13 @@ class CaissierController extends Controller
     public function validatePayment(Request $data)
     {
         $commande = Commande::find($data->id);
-        $commande->payment = 'paid';
+        $commande->payment = true;
         $commande->save();
+
+        if ($commande->type !== 'distance') {
+            $table = Table::find($commande->tabl_id);
+            $table->disponible = true;
+        }
 
         return redirect()->back();
     }
